@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{minted}
+% chktex-file 29
+\sloppy
+
+\title{Projeto PIC10F202}
+\author{\sc{Pedro Faria Fernandes, Vinícios Bidin \& Yuri Becker}}
+\date{01 de junho de 2023}
+
+\begin{document}
+	\maketitle
+
+	\section{Questão 1}
+		\paragraph{} Este algoritmo consiste em um somatório de 9 até 0, pois tem-se um laço de repetição com o seguinte critério de parada: o valor do registrador \texttt{mem[0x08]}
+		após o decremento de 1 do valor deste, na \textit{label} `loop' precisa ser 0. Neste caso, o programa irá pular para a \textit{label} `break', onde irá pular para o final do programa.
+		\par{} O literal carregado para o registrador `w', na primeira linha da \textit{label} `main' é 10, porém, como no critério de parada, antes de ser armazenado o valor da soma no registrador `w', é decrementado em um o valor de `w'. Por conta disto, se trata de um somatório do valor de $w - 1$ até 0. $\sum\limits_{i=w-1}^{1}i$
+		\par{} À seguir, tem-se o equivalente ao código feito na linguagem C.
+		\begin{minted}{c}
+int main(void) {
+	int w, f;
+	f = w;
+	w = 0;
+
+	while (--f) {
+		w += f;
+	}
+
+	f = w;
+	return 0;
+}
+		\end{minted}
+	\section{Questão 2}
+		\begin{verbatim}
+			main:
+			    MOVLW 4
+			    MOVWF 0x08
+			    MOVLW 7
+			    MOVWF 0x0C
+			loop:
+			    MOVF 0x08, 0
+			    ADDWF 0x0C, 0
+			    MOVWF 0x10
+
+			    MOVF 0x08, 0
+			    ANDWF 0x0C, 0
+			    MOVWF 0x14
+
+			    MOVF 0x10, 0
+			    SUBWF 0x14, 0
+			    BTFSC STATUS, 2
+			    GOTO end
+
+			    DECFSZ 0x08, 1
+			    GOTO loop
+			end:
+			    END
+		\end{verbatim}
+\end{document}
