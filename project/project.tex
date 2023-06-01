@@ -1,38 +1,41 @@
-\documentclass[12pt]{article}
-
+\documentclass[12pt]{report}
 \usepackage[brazil]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{minted}
-% chktex-file 29
-\sloppy
+\usepackage{tabularx}
+\usepackage{booktabs}
 
+\sloppy
+\renewcommand{\arraystretch}{1.15}
 \title{Projeto PIC10F202}
-\author{\sc{Pedro Faria Fernandes, Vinícios Bidin \& Yuri Becker}}
+\author{Pedro Faria Fernandes, Vinícios Bidin, Yuri Becker}
 \date{01 de junho de 2023}
 
 \begin{document}
 	\maketitle
+	\section*{Questão 1}
+		Este algoritmo consiste em um somatório de 9 até 0, pois tem-se um laço de repetição com o seguinte critério de parada: o valor do registrador \texttt{mem[0$\times$08]}
+		após o decremento de 1 do valor deste, na \textit{label} `loop', precisa ser 0. Neste caso, o programa irá pular para a \textit{label} `break', onde irá pular para o final do programa.
 
-	\section{Questão 1}
-		\paragraph{} Este algoritmo consiste em um somatório de 9 até 0, pois tem-se um laço de repetição com o seguinte critério de parada: o valor do registrador \texttt{mem[0x08]}
-		após o decremento de 1 do valor deste, na \textit{label} `loop' precisa ser 0. Neste caso, o programa irá pular para a \textit{label} `break', onde irá pular para o final do programa.
-		\par{} O literal carregado para o registrador `w', na primeira linha da \textit{label} `main' é 10, porém, como no critério de parada, antes de ser armazenado o valor da soma no registrador `w', é decrementado em um o valor de `w'. Por conta disto, se trata de um somatório do valor de $w - 1$ até 0. $\sum\limits_{i=w-1}^{1}i$
-		\par{} À seguir, tem-se o equivalente ao código feito na linguagem C.
-		\begin{minted}{c}
-int main(void) {
-	int w, f;
-	f = w;
-	w = 0;
+		O literal carregado para o registrador `w', na primeira linha da \textit{label} `main', é 10. Porém, como no critério de parada, antes de ser armazenado o valor da soma no registrador `w', é decrementado em um o valor de `w'. Por conta disso, trata-se de um somatório do valor de $w - 1$ até 0: $\sum\limits_{i=w-1}^{1}i$.
 
-	while (--f) {
-		w += f;
+		A seguir, tem-se o equivalente ao código feito na linguagem de programação C:\@
+	\begin{minted}{c}
+	int main(void) {
+		int w, f;
+		f = w;
+		w = 0;
+
+		while (--f) {
+			w += f;
+		}
+
+		f = w;
+		return 0;
 	}
-
-	f = w;
-	return 0;
-}
-		\end{minted}
-	\section{Questão 2}
+	\end{minted}
+	\clearpage
+	\section*{Questão 2}
 		\begin{verbatim}
 			main:
 			    MOVLW 4
@@ -58,4 +61,31 @@ int main(void) {
 			end:
 			    END
 		\end{verbatim}
+	\clearpage
+	\section*{Questão 3}
+		Datapath goes here
+	\clearpage
+	\section*{Questão 4}
+		\begin{table}[ht]
+			\centering
+			\caption{\textbf{Sinais de controle}}
+			\begin{tabular}{cccccccc}
+				\toprule
+				\textbf{Instruction} & \textbf{wF} & \textbf{wW} & \textbf{op} & \textbf{source} & \textbf{skip} & \textbf{goto} & \textbf{chkStatus} \\
+				\midrule
+				MOVLW & wF & wW & MOV & 1 & 0 & 0 & x \\
+				MOVWF & wF & wW & MOV & 0 & 0 & 0 & x \\
+				MOVF & wF & wW & MOV & 0 & 0 & 0 & x \\
+				ADDWF & wF & wW & ADD & 0 & 0 & 0 & x \\
+				ANDWF & wF & wW & AND & 0 & 0 & 0 & x \\
+				SUBWF & wF & wW & SUB & 0 & 0 & 0 & x \\
+				BTFSC & 0 & 0 & x & x & 1 & 0 & 1 \\
+				GOTO & 0 & 0 & x & x & x & 1 & x \\
+				DECFSZ & 1 & 0 & x & 0 & 1 & 0 & 0 \\
+				\bottomrule
+			\end{tabular}\label{tab:Sinais de controle}
+			\begin{tabularx}{\textwidth}{l X}
+				\textbf{Nota:} & Abreviações utilizadas na tabela --- \textit{wF}: writeF, \textit{wW}: writeW, \textit{src}: source.
+			\end{tabularx}
+		\end{table}
 \end{document}
