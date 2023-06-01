@@ -69,19 +69,19 @@
 		\begin{table}[ht]
 			\centering
 			\caption{\textbf{Sinais de controle}}
-			\begin{tabular}{cccccccc}
+			\begin{tabular}{ccccccccc}
 				\toprule
-				\textbf{Instruction} & \textbf{wF} & \textbf{wW} & \textbf{op} & \textbf{source} & \textbf{skip} & \textbf{goto} & \textbf{chkStatus} \\
+				\textbf{Instr} & \textbf{w} & \textbf{frmt} & \textbf{dst} & \textbf{op} & \textbf{src} & \textbf{skip} & \textbf{goto} & \textbf{chkStatus} \\
 				\midrule
-				MOVLW & wF & wW & MOV & 1 & 0 & 0 & x \\
-				MOVWF & wF & wW & MOV & 0 & 0 & 0 & x \\
-				MOVF & wF & wW & MOV & 0 & 0 & 0 & x \\
-				ADDWF & wF & wW & ADD & 0 & 0 & 0 & x \\
-				ANDWF & wF & wW & AND & 0 & 0 & 0 & x \\
-				SUBWF & wF & wW & SUB & 0 & 0 & 0 & x \\
-				BTFSC & 0 & 0 & x & x & 1 & 0 & 1 \\
-				GOTO & 0 & 0 & x & x & x & 1 & x \\
-				DECFSZ & 1 & 0 & x & 0 & 1 & 0 & 0 \\
+				MOVLW & 1 & 0 & 0 & MOV & 1 & 0 & 0 & x \\
+				MOVWF & 1 & 1 & x & MOV & 0 & 0 & 0 & x \\
+				MOVF & 1 & 1 & x & MOV & 0 & 0 & 0 & x \\
+				ADDWF & 1 & 1 & x & ADD & 0 & 0 & 0 & x \\
+				ANDWF & 1 & 1 & x & AND & 0 & 0 & 0 & x \\
+				SUBWF & 1 & 1 & x & SUB & 0 & 0 & 0 & x \\
+				BTFSC & 0 & x & x & x & x & 1 & 0 & 1 \\
+				GOTO & 0 & x & x & x & x & x & 1 & x \\
+				DECFSZ & 1 & 1 & x & x & 0 & 1 & 0 & 0 \\
 				\bottomrule
 			\end{tabular}\label{tab:Sinais de controle}
 			\begin{tabularx}{\textwidth}{l X}
