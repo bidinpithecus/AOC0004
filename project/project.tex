@@ -6,12 +6,11 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{svg}
 
 \sloppy
 \renewcommand{\arraystretch}{1.15}
 \title{Projeto PIC10F202}
-\author{Pedro Faria Fernandes, Vinícios Bidin, Yuri Becker}
+\author{Pedro Faria Fernandes, Vinícios Bidin, Bruno Oliveira}
 \date{01 de junho de 2023}
 
 \begin{document}
@@ -64,13 +63,11 @@
 			end:
 			    END
 		\end{verbatim}
-	\clearpage
 	\section*{Questão 3}
 		\begin{figure}[H]
 			\centering
-			\includegraphics{datapath.png}
+			\includegraphics{datapath.jpg}
 		\end{figure}
-		% \includesvg{datapath}
 	\clearpage
 	\section*{Questão 4}
 		\begin{table}[ht]
@@ -78,7 +75,7 @@
 			\caption{\textbf{Sinais de controle}}
 			\begin{tabular}{ccccccccc}
 				\toprule
-				\textbf{Instr} & \textbf{w} & \textbf{frmt} & \textbf{dst} & \textbf{op} & \textbf{src} & \textbf{skip} & \textbf{goto} & \textbf{chkStatus} \\
+				\textbf{Instr} & \textbf{w} & \textbf{frmt} & \textbf{dest} & \textbf{op} & \textbf{src} & \textbf{skip} & \textbf{goto} & \textbf{chkStatus} \\
 				\midrule
 				MOVLW & 1 & 0 & 0 & MOV & 1 & 0 & 0 & x \\
 				MOVWF & 1 & 1 & x & MOV & 0 & 0 & 0 & x \\
@@ -92,7 +89,7 @@
 				\bottomrule
 			\end{tabular}\label{tab:Sinais de controle}
 			\begin{tabularx}{\textwidth}{l X}
-				\textbf{Nota:} & Abreviações utilizadas na tabela --- \textit{wF}: writeF, \textit{wW}: writeW, \textit{src}: source.
+				\textbf{Nota:} & Abreviações utilizadas na tabela --- \textit{w}: write, \textit{frmt}: format, \textit{src}: source, \textit{chkStatus}: checkStatus.
 			\end{tabularx}
 		\end{table}
 \end{document}
