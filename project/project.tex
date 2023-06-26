@@ -39,29 +39,38 @@
 	\clearpage
 	\section*{Questão 2}
 		\begin{verbatim}
-			main:
-			    MOVLW 4
-			    MOVWF 0x08
-			    MOVLW 7
-			    MOVWF 0x0C
-			loop:
-			    MOVF 0x08, 0
-			    ADDWF 0x0C, 0
-			    MOVWF 0x10
+main:
+    ; $w é o registrador W do PIC10F202
+    ; Mapeamento entre endereços do File Register e variáveis: 
+    ; 0x08 = x
+    ; 0x09 = y
+    ; 0x10 = z
+    ; 0x11 = q
 
-			    MOVF 0x08, 0
-			    ANDWF 0x0C, 0
-			    MOVWF 0x14
+    MOVLW 4 ; $w = 4
+    MOVWF 0x08 ; x = $w
 
-			    MOVF 0x10, 0
-			    SUBWF 0x14, 0
-			    BTFSC STATUS, 2
-			    GOTO end
-
-			    DECFSZ 0x08, 1
-			    GOTO loop
-			end:
-			    END
+    MOVLW 7 ; $w = 7
+    MOVWF 0x09 ; y = $w
+loop:
+    MOVF 0x08, 0 ; $w = x
+    ADDWF 0x09, 0 ; $w = $w + y
+    MOVWF 0x10 ; z = $w -> z = x + y
+		
+    MOVF 0x08, 0 ; $w = x
+    ANDWF 0x09, 0 ; $w = $w & y
+    MOVWF 0x11 ; q = $w -> q = x & y
+		
+    MOVF 0x10, 0 ; $w = z
+    SUBWF 0x11, 0 ; $w = $w - q
+    BTFSC STATUS, 2 ; Sw $w for zero, pula a próxima instrução. 
+    GOTO end ; equivalente a 'break'
+		
+    DECFSZ 0x08, 1 ; x = x - 1 e se o resultado for zero,
+    ; pula a próxima instrução.
+    GOTO loop
+end:
+    END ; return 0
 		\end{verbatim}
 	\section*{Questão 3}
 		\begin{figure}[H]
