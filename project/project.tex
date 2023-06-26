@@ -10,8 +10,8 @@
 \sloppy
 \renewcommand{\arraystretch}{1.15}
 \title{Projeto PIC10F202}
-\author{Pedro Faria Fernandes, Vinícios Bidin, Bruno Oliveira}
-\date{01 de junho de 2023}
+\author{Bruno Oliveira de Assis Pereira,\and Pedro Faria Fernandes,\and Vinícios Bidin Santos}
+\date{26 de junho de 2023}
 
 \begin{document}
 	\maketitle
@@ -63,7 +63,7 @@ loop:
 		
     MOVF 0x10, 0 ; $w = z
     SUBWF 0x11, 0 ; $w = $w - q
-    BTFSC STATUS, 2 ; Sw $w for zero, pula a próxima instrução. 
+    BTFSC STATUS, 2 ; Se $w for zero, pula a próxima instrução. 
     GOTO end ; equivalente a 'break'
 		
     DECFSZ 0x08, 1 ; x = x - 1 e se o resultado for zero,
@@ -73,15 +73,16 @@ end:
     END ; return 0
 		\end{verbatim}
 	\section*{Questão 3}
-		\begin{figure}[H]
+		\begin{figure}
 			\centering
-			\includegraphics{datapath.jpg}
+			\includegraphics[scale = 0.82621]{datapath.jpg}
+			\caption{Datapath of PIC10F202}
+			\label{datapath}
 		\end{figure}
 	\clearpage
 	\section*{Questão 4}
 		\begin{table}[ht]
 			\centering
-			\caption{\textbf{Sinais de controle}}
 			\begin{tabular}{ccccccccc}
 				\toprule
 				\textbf{Instr} & \textbf{w} & \textbf{frmt} & \textbf{dest} & \textbf{op} & \textbf{src} & \textbf{skip} & \textbf{goto} & \textbf{chkStatus} \\
@@ -100,5 +101,7 @@ end:
 			\begin{tabularx}{\textwidth}{l X}
 				\textbf{Nota:} & Abreviações utilizadas na tabela --- \textit{w}: write, \textit{frmt}: format, \textit{src}: source, \textit{chkStatus}: checkStatus.
 			\end{tabularx}
+			\caption{\textbf{Sinais de controle}}
+			\label{sinais de controle}
 		\end{table}
 \end{document}
