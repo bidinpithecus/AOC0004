@@ -63,7 +63,7 @@ loop:
 		
     MOVF 0x0A, 0 ; $w = z
     SUBWF 0x0B, 0 ; $w = $w - q
-    BTFSC STATUS, 2 ; Sw $w for zero, pula a próxima instrução. 
+    BTFSC STATUS, 2 ; Se $w for zero, pula a próxima instrução. 
     GOTO end ; equivalente a 'break'
 		
     DECFSZ 0x08, 1 ; x = x - 1 e se o resultado for zero,
