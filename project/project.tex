@@ -44,8 +44,8 @@ main:
     ; Mapeamento entre endereços do File Register e variáveis: 
     ; 0x08 = x
     ; 0x09 = y
-    ; 0x10 = z
-    ; 0x11 = q
+    ; 0x0A = z
+    ; 0x0B = q
 
     MOVLW 4 ; $w = 4
     MOVWF 0x08 ; x = $w
@@ -55,14 +55,14 @@ main:
 loop:
     MOVF 0x08, 0 ; $w = x
     ADDWF 0x09, 0 ; $w = $w + y
-    MOVWF 0x10 ; z = $w -> z = x + y
+    MOVWF 0x0A ; z = $w -> z = x + y
 		
     MOVF 0x08, 0 ; $w = x
     ANDWF 0x09, 0 ; $w = $w & y
-    MOVWF 0x11 ; q = $w -> q = x & y
+    MOVWF 0x0B ; q = $w -> q = x & y
 		
-    MOVF 0x10, 0 ; $w = z
-    SUBWF 0x11, 0 ; $w = $w - q
+    MOVF 0x0A, 0 ; $w = z
+    SUBWF 0x0B, 0 ; $w = $w - q
     BTFSC STATUS, 2 ; Sw $w for zero, pula a próxima instrução. 
     GOTO end ; equivalente a 'break'
 		
